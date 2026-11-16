@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PreToken Radar — which pre-token protocol is worth farming next</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="masthead">
+  <div class="brand">
+    <div class="brand-mark" aria-hidden="true"></div>
+    <div>
+      <h1>PRETOKEN RADAR</h1>
+      <p class="tagline">Every protocol that records no token yet, ranked by what its launch would be worth — and exactly how to farm it before it happens.</p>
+    </div>
+  </div>
+  <div class="mast-stats" id="mastStats"></div>
+  <p class="source-line" id="sourceLine"></p>
+</header>
+
+<section class="method" id="methodStrip">
+  <h2>How the number is made</h2>
+  <p id="methodText"></p>
+  <div class="method-stats" id="methodStats"></div>
+</section>
+
+<nav class="tabs" id="viewTabs">
+  <button data-view="board" class="tab active">Radar board</button>
+  <button data-view="live" class="tab">Already tokenised</button>
+  <button data-view="aside" class="tab">Set aside — and why</button>
+</nav>
+
+<section class="controls" id="boardControls">
+  <label class="ctl grow">Search
+    <input type="search" id="q" placeholder="Protocol name or category">
+  </label>
+  <label class="ctl">Category
+    <select id="catFilter"><option value="">All categories</option></select>
+  </label>
+  <label class="ctl">Chain
+    <select id="chainFilter"><option value="">All chains</option></select>
+  </label>
+  <label class="ctl">Min TVL
+    <select id="tvlFilter">
+      <option value="0">Any size</option>
+      <option value="10000000">$10M+</option>
+      <option value="50000000">$50M+</option>
+      <option value="250000000">$250M+</option>
+      <option value="1000000000">$1B+</option>
+    </select>
+  </label>
+  <label class="ctl">Sort by
+    <select id="sortBy">
+      <option value="rank">Implied value</option>
+      <option value="tvl">TVL</option>
+      <option value="growth">7d growth</option>
+      <option value="age">Time without a token</option>
+      <option value="budget">Farm budget, low first</option>
+    </select>
+  </label>
+  <label class="ctl check">
+    <input type="checkbox" id="watchOnly"> Watchlist only
+  </label>
+  <span class="count" id="rowCount"></span>
+</section>
+
+<main>
+  <div class="table-wrap" id="boardWrap">
+    <table id="board">
+      <thead>
+        <tr>
+          <th class="num">#</th><th>Protocol</th><th>Chains</th>
+          <th class="num">TVL</th><th class="num">7d</th><th class="num">No token for</th>
+          <th class="num">Implied value</th><th>Value band</th>
+          <th class="num">Farm budget</th><th class="num">Plan</th>
+        </tr>
+      </thead>
+      <tbody id="boardBody"></tbody>
+    </table>
+  </div>
+
+  <div class="table-wrap hidden" id="liveWrap">
+    <p class="view-note">These protocols already record a token, so there is no launch left to farm. They are not ranked — they are the peer set the value model is calibrated on: each candidate is priced from the median market-cap/TVL multiple of the traded protocols in its category.</p>
+    <table id="liveTable">
+      <thead><tr><th>Protocol</th><th>Symbol</th><th>Category</th><th class="num">TVL</th><th class="num">Market cap</th><th class="num">Cap / TVL</th></tr></thead>
+      <tbody id="liveBody"></tbody>
+    </table>
+  </div>
+
+  <div class="table-wrap hidden" id="asideWrap">
+    <p class="view-note">These record no token either — but each is a wrapped, staked or bridged product of a token that already trades, an exchange's own entry, or a versioned copy. None of them has a launch of its own coming, so the radar sets them aside instead of ranking them, and says why for each one.</p>
+    <table id="asideTable">
+      <thead><tr><th>Protocol</th><th>Category</th><th class="num">TVL</th><th>Why it is set aside</th></tr></thead>
+      <tbody id="asideBody"></tbody>
+    </table>
+  </div>
+</main>
+
+<aside class="detail hidden" id="detail">
+  <button class="detail-close" id="detailClose" aria-label="Close detail">×</button>
+  <div id="detailBody"></div>
+</aside>
+<div class="scrim hidden" id="scrim"></div>
+
+<footer>
+  <p>Implied value is this radar's own model claim, computed from the snapshot's figures at build time — not a prediction that a token will be issued, or when. A protocol shown here <em>records</em> no token in the snapshot; that is a statement about the record, not proof that no token exists anywhere. Farm plans are starting points with stated budgets, not financial advice.</p>
+</footer>
+
+<script src="../data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
